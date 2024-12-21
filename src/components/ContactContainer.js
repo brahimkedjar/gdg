@@ -185,7 +185,7 @@ export const Contact = () => {
     };
   
     try {
-      const response = await fetch("http://easylearngo.epizy.com/send-contact-message.php", {
+      const response = await fetch("https://easylearngo.epizy.com/send-contact-message.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
