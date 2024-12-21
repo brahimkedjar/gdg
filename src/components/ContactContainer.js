@@ -184,15 +184,12 @@ export const Contact = () => {
       message,
     };
   
-    try {
-      const response = await fetch("https://brahimkedjarstore.epizy.com/send-contact-message.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        mode: "cors", // Ensure CORS mode is enabled
-      });
+   try {
+        const response = await fetch("https://brahimkedjarstore.epizy.com/send-contact-message.php", {
+            method: "POST",
+            body: formData,
+        });
+
   
       console.log(response); // Check response status
   
