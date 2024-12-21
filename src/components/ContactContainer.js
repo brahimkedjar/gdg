@@ -170,45 +170,49 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validate fields
     if (!firstName || !lastName || !email || !message) {
-      setError("Please fill in all fields");
-      return;
+        setError("Please fill in all fields");
+        return;
     }
-  
+
     const formData = {
-      firstName,
-      lastName,
-      email,
-      message,
+        firstName,
+        lastName,
+        email,
+        message,
     };
-  
-   try {
+
+    try {
         const response = await fetch("https://brahimkedjarstore.epizy.com/send-contact-message.php", {
             method: "POST",
-            body: formData,
+            headers: {
+                "Content-Type": "application/json", // Indicate JSON data
+            },
+            body: JSON.stringify(formData), // Convert to JSON string
         });
 
-  
-      console.log(response); // Check response status
-  
-      const data = await response.json();
-  
-      if (data.success) {
-        setSuccess("Your message has been sent successfully!");
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setMessage("");
-      } else {
-        setError(data.error || "An error occurred. Please try again.");
-      }
+        console.log(response); // Check response status
+
+        const data = await response.json();
+
+        if (data.success) {
+            setSuccess("Your message has been sent successfully!");
+            setError("");
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setMessage("");
+        } else {
+            setError(data.error || "An error occurred. Please try again.");
+        }
     } catch (err) {
-      setError("Failed to send message. Please try again.");
-      console.log(err); // Log the error to understand what went wrong
+        setError("Failed to send message. Please try again.");
+        console.log(err); // Log the error to understand what went wrong
     }
-  };
+};
+
   
   return (
     <PageContainer>
